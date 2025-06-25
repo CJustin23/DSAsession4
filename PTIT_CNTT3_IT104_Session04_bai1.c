@@ -2,44 +2,35 @@
 #include <stdlib.h>
 
 int main(void) {
-    // Nhập số phần tử của mảng
+    // Nhập số lượng phần tử của mảng
     int n;
-    printf("Nhap vao so phan tu cua mang: ");
+    printf("Nhap so phan tu cua mang: ");
     scanf("%d", &n);
 
-    // Cấp phát bộ nhớ động cho mảng có n phần tử
+    // Cấp phát bộ nhớ động cho mảng với n phần tử
     int *arr = (int *)malloc(n * sizeof(int));
 
-    // Nhập các phần tử cho mảng
-    printf("Nhap vao tung phan tu cua mang:\n");
+    // Nhập các phần tử vào mảng
     for (int i = 0; i < n; i++) {
         printf("Phan tu thu %d: ", i + 1);
         scanf("%d", &arr[i]);
     }
 
-    // Nhập giá trị cần tìm
-    int num;
-    printf("Nhap vao phan tu bat ky: ");
-    scanf("%d", &num);
+    // Khởi tạo biến max là phần tử đầu tiên, temp là chỉ số của max
+    int max = arr[0], temp = 0;
 
-    // Biến kiểm tra xem có tìm thấy không
-    int check = 0;
-
-    // Tìm kiếm phần tử trong mảng
+    // Tìm phần tử lớn nhất và chỉ số của nó
     for (int i = 0; i < n; i++) {
-        if (arr[i] == num) {
-            printf("Phan tu %d nam tai vi tri index %d\n", num, i);
-            check = 1;
-            break;
+        if (max < arr[i]) {
+            max = arr[i];   // cập nhật giá trị lớn nhất
+            temp = i;       // lưu lại chỉ số của phần tử lớn nhất
         }
     }
 
-    // Nếu không tìm thấy
-    if (check == 0) {
-        printf("Khong tim thay phan tu %d trong mang.\n", num);
-    }
+    // In ra chỉ số của phần tử lớn nhất
+    printf("Chi so cua phan tu lon nhat la: %d\n", temp);
 
-    // Giải phóng vùng nhớ
+    // Giải phóng bộ nhớ đã cấp phát
     free(arr);
 
     return 0;
